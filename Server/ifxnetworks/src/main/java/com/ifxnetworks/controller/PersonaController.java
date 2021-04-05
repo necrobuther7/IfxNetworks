@@ -3,11 +3,13 @@ package com.ifxnetworks.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ifxnetworks.model.Cargo;
@@ -15,11 +17,13 @@ import com.ifxnetworks.model.Persona;
 import com.ifxnetworks.services.PersonaService;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class PersonaController {
 	
 	@Autowired
 	PersonaService personaService;
 	
+
 	@GetMapping("/personas")
 	public List<Persona> getAllPersonas(){
 		return personaService.getAll();
@@ -31,7 +35,7 @@ public class PersonaController {
 	}
 	
 	@PostMapping("/persona")
-	public void add(Persona persona) {
+	public void add(@RequestBody Persona persona) {
 		personaService.post(persona);
 	}
 	
